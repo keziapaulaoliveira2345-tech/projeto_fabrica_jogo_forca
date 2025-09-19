@@ -1,61 +1,78 @@
-import random
 
-def jogar():
-    imprime_mensagem_abertura()
-    palavra_secreta = carrega_palavra_secreta()
-    letras_acertadas = inicializa_letras_acertadas(palavra_secreta)
-    print(' '.join(letras_acertadas))  # Melhor exibir assim
+# 🎯 Jogo da Forca
 
-    enforcou = False
-    acertou = False
-    erros = 0
+Bem-vindo ao **Jogo da Forca**, um divertido jogo em Python onde o jogador tenta adivinhar uma palavra secreta, letra por letra, com até **6 erros permitidos**.
 
-    while not enforcou and not acertou:
-        chute = pede_chute()
+---
 
-        if chute in palavra_secreta:
-            for index, letra in enumerate(palavra_secreta):
-                if chute == letra:
-                    letras_acertadas[index] = letra
-        else:
-            erros += 1
-            print(f"Você errou! Tentativas restantes: {6 - erros}")
+## 🕹️ Como Jogar
 
-        enforcou = erros == 6
-        acertou = '_' not in letras_acertadas
-        print(' '.join(letras_acertadas))
+1. Execute o script `forca.py`.
+2. Uma palavra secreta será selecionada aleatoriamente a partir de um arquivo de palavras.
+3. Tente adivinhar a palavra **uma letra por vez**.
+4. Você tem **6 chances** para errar antes de perder o jogo.
+5. O jogo termina quando você:
 
-    if acertou:
-        print('Você ganhou!')
-    else:
-        print(f'Você perdeu! A palavra era "{palavra_secreta}".')
-    print('Fim do jogo')
+   * Acerta todas as letras da palavra → **Você ganha!** 🏆
+   * Comete 6 erros → **Você perde!** 💀
 
-def pede_chute():
-    chute = input('Qual a letra? ').strip().lower()
-    return chute
+---
 
-def imprime_mensagem_abertura():
-    print('********************************************')
-    print('******* Bem vindo ao jogo da Forca! ********')
-    print('********************************************')
+## 💻 Executando o Jogo
 
-def carrega_palavra_secreta(nome_do_arquivo=r'C:\Users\Aluno_Programador2\Desktop\jogo\palavras_forca.txt'):
-    try:
-        with open(nome_do_arquivo, 'r') as arquivo:
-            palavras = [linha.strip() for linha in arquivo if linha.strip()]
-        if not palavras:
-            print("Arquivo de palavras está vazio.")
-            exit()
-        numero = random.randrange(len(palavras))
-        palavra_secreta = palavras[numero].lower()
-        return palavra_secreta
-    except FileNotFoundError:
-        print(f"Arquivo {nome_do_arquivo} não encontrado.")
-        exit()
+Certifique-se de ter **Python 3.x** instalado no seu computador.
 
-def inicializa_letras_acertadas(palavra):
-    return ['_' for _ in palavra]
+```bash
+# Clone o repositório
+git clone <URL_DO_REPOSITORIO>
 
-if __name__ == '__main__':
-    jogar()
+# Entre na pasta do projeto
+cd forca
+
+# Execute o jogo
+python forca.py
+```
+
+> ⚠️ **Atenção:** Atualize o caminho do arquivo `palavras_forca.txt` dentro da função `carrega_palavra_secreta()` para o diretório correto no seu computador.
+
+---
+
+## 🛠️ Funcionalidades
+
+* Seleção aleatória de palavras a partir de um arquivo de texto.
+* Contador de erros do jogador (até 6).
+* Interface em linha de comando simples e intuitiva.
+* Mensagens de vitória e derrota.
+
+---
+
+## 📂 Estrutura do Projeto
+
+```
+forca/
+│
+├── forca.py               # Código principal do jogo
+├── palavras_forca.txt     # Lista de palavras secretas
+└── README.md              # Documentação do projeto
+```
+
+---
+
+## 🔧 Melhorias Futuras
+
+* Adicionar **categorias de palavras** (animais, frutas, países, etc.).
+* Implementar **interface gráfica** com `Tkinter` ou `PyGame`.
+* Registrar **pontuação e histórico de jogos**.
+
+---
+
+## 👩‍💻 Sobre o Projeto
+
+Este projeto é um ótimo exercício para praticar:
+
+* Estruturas de repetição (`while`, `for`)
+* Condicionais (`if/else`)
+* Manipulação de arquivos (`open`, `read`, `close`)
+* Funções em Python
+* Lógica de jogos
+
